@@ -21,9 +21,13 @@ export default {
     },
     created(){
         console.log(process.env.NODE_ENV,"ss",process.platform);
-        Home.getMockData().then((res) => {
+        Home.getMockData({name:'wss'}).then((res) => {
             console.log(res);
         });
+         Home.getMockData2({name:'wss'}).then((res) => {
+            console.log(res);
+        })
+        
     }
 }
 </script>

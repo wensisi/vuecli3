@@ -55,7 +55,12 @@ module.exports = {
     //   // 开启 CSS source maps?
     //   sourceMap: false,
     //   // css预设器配置项
-    //   loaderOptions: {},
+    loaderOptions: {
+      sass: {
+        // data参数是scss-loader8.0以下的版本使用
+        prependData: "@import'@/assets/css/variables.scss'"
+      }
+    }
     //   // 启用 CSS modules for all css / pre-processor files.
     //   modules: false
   },

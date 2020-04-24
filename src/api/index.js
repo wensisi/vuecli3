@@ -1,47 +1,7 @@
 import Axios from 'axios';
-const base = {
-  home:'home',
-  user:'user'
-}
- Object.keys(base).forEach( item => {
-  base[item] = base[item] + '/V1/'
-});
-
-const service = Axios.create({
-  timeout:5000
-});
-
-service.interceptors.request.use(function(config){
-    //在发送请求之前做某事
-    console.log("拦截")
-  // 是否显示loading
-  //   app.$vux.loading.show({
-  //     text: '数据加载中……'
-  // });
-
-
-    // config.method === 'post'  //将post请求jsonStringfy化
-    // ? config.data = qs.stringify({...config.data})
-    // : config.params = {...config.params};
-    // 设置文本格式是键 值对象的形式
-    config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-
-    if(config.method == 'get')
-    {
-      config.params = {
-        "_t":"dadvad",
-        ...config.params
-      }
-      // config.params['_t'] = 'rgasrg';
-    }
-    console.log(config)  //单次请求的配置信息对象
-    return config;  //只有return config后，才能成功发送请求
-  },function(error){
-    //请求错误时做些事
-    return Promise.reject(error);
-  })
-//取消请求  多个请求取消管理参考  https://www.jianshu.com/p/22b49e6ad819
- /* let CancelToken = Axios.CancelToken
+import qs from 'qs'
+// 取消请求  多个请求取消管理参考  https://www.jianshu.com/p/22b49e6ad819
+/* let CancelToken = Axios.CancelToken
   let self = this
   axios.get('http://jsonplaceholder.typicode.com/comments', {
     cancelToken: new CancelToken(function executor(c) {
@@ -54,7 +14,6 @@ service.interceptors.request.use(function(config){
   }).catch(err => {
     console.log(err)
   })
-
 
   //手速够快就不用写这个定时器了，点击取消获取就可以看到效果了
   setTimeout(function () {
@@ -71,12 +30,51 @@ cancelGetMsg () {
 */
 
 import HomeApi from './home';
-console.log(HomeApi);
-const Home = HomeApi(service,base);
 
 import User from './user';
+const base = {
+  home: 'home',
+  user: 'user'
+}
+Object.keys(base).forEach(item => {
+  base[item] = base[item] + '/V1/'
+});
+
+const service = Axios.create({
+  timeout: 5000
+});
+
+service.interceptors.request.use(function (config) {
+  // 在发送请求之前做某事
+  console.log('拦截')
+  // 是否显示loading
+  //   app.$vux.loading.show({
+  //     text: '数据加载中……'
+  // });
+
+  config.method === 'post' // 将post请求jsonStringfy化
+    ? config.data = qs.stringify({ ...config.data })
+    : config.params = { ...config.params };
+  // 设置文本格式是键 值对象的形式
+  config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+  if (config.method === 'get') {
+    config.params = {
+      _t: 'dadvad',
+      ...config.params
+    }
+    // config.params['_t'] = 'rgasrg';
+  }
+  console.log(config) // 单次请求的配置信息对象
+  return config; // 只有return config后，才能成功发送请求
+}, function (error) {
+  // 请求错误时做些事
+  return Promise.reject(error);
+})
+console.log(HomeApi);
+const Home = HomeApi(service, base);
 
 export {
-   Home,
-   User
+  Home,
+  User
 }

@@ -1,6 +1,22 @@
 {
+ "news":{
   "code":"1",
-  "data":{
-      "name":"wss"
-  }
+  "data":[{
+    "title":"new1",
+    "detali":"xhiufaisjdf"
+  },{
+    "title":"new2",
+    "detali":"xhiufaisjdf"
+  }]
+ },
+ "news2":{
+  "code":"1",
+  "data":[{
+    "title":"news2news2",
+    "detali":"xhiufaisjdf"
+  },{
+    "title":"news2news2",
+    "detali":"xhiufaisjdf"
+  }]
+ }
 }
